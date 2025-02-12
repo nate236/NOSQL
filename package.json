@@ -1,0 +1,32 @@
+{
+  "name": "nosql-social-network",
+  "version": "1.0.0",
+  "description": "A RESTful API for a social network built with Node.js, Express, and MongoDB, handling users, thoughts, reactions, and friend relationships.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nate236/NOSQL.git"
+  },
+  "keywords": [
+    "social",
+    "network",
+    "API",
+    "NoSQL",
+    "mongodb",
+    "express",
+    "nodejs"
+  ],
+  "author": "Nathan Kelley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nate236/NOSQL/issues"
+  },
+  "homepage": "https://github.com/nate236/NOSQL#readme",
+  "dependencies": {
+    "all": "^0.0.0"
+  }
+}
