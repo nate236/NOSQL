@@ -1,18 +1,20 @@
 const express = require('express');
+const db = require('./config/connection');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.send('Server is up and running!');
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
+// Listen for errors on the database connection
 db.on('error', (err) => {
-    console.error('Connection error:', err);
+  console.error('MongoDB connection error:', err);
+});
+
+// Start the server once the database connection is open
+db.once('open', () => {
+  console.log('MongoDB connection successful');
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
   });
+});
