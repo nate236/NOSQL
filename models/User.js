@@ -1,3 +1,4 @@
+// models/User.js
 const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
@@ -12,7 +13,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      // Simple email validation regex
+      // Simple regex for email validation
       match: [/.+@.+\..+/, 'Must match a valid email address!'],
     },
     thoughts: [
@@ -36,7 +37,7 @@ const userSchema = new Schema(
   }
 );
 
-// Virtual to get friend count
+// Virtual to retrieve the friend count
 userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
 });

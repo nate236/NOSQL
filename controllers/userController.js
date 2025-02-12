@@ -1,3 +1,4 @@
+// controllers/userController.js
 const { User, Thought } = require('../models');
 
 const userController = {
@@ -10,7 +11,7 @@ const userController = {
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => res.status(500).json(err));
   },
-  // GET a single user by _id and populated thought and friend data
+  // GET a single user by its _id and populate thought and friend data
   getUserById({ params }, res) {
     User.findOne({ _id: params.userId })
       .populate({ path: 'thoughts', select: '-__v' })
@@ -44,20 +45,19 @@ const userController = {
       })
       .catch((err) => res.status(500).json(err));
   },
-  // DELETE a user by its _id (and remove associated thoughts)
+  // DELETE a user by its _id (BONUS: Remove associated thoughts)
   deleteUser({ params }, res) {
     User.findOneAndDelete({ _id: params.userId })
       .then((deletedUser) => {
         if (!deletedUser) {
           return res.status(404).json({ message: 'No user with this id!' });
         }
-        // BONUS: Remove associated thoughts
         return Thought.deleteMany({ _id: { $in: deletedUser.thoughts } });
       })
       .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
-  // POST to add a new friend to a user's friend list
+  // POST to add a friend to a user's friend list
   addFriend({ params }, res) {
     User.findOneAndUpdate(
       { _id: params.userId },

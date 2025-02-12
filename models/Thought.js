@@ -1,6 +1,8 @@
+// models/Thought.js
 const { Schema, model, Types } = require('mongoose');
 const moment = require('moment');
 
+// Reaction subdocument schema (no separate model)
 const reactionSchema = new Schema(
   {
     reactionId: {
@@ -19,7 +21,7 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // Format date on query using a getter
+      // Format the timestamp on query
       get: (timestamp) => moment(timestamp).format('MMM DD, YYYY [at] hh:mm a'),
     },
   },
@@ -48,7 +50,7 @@ const thoughtSchema = new Schema(
       type: String,
       required: true,
     },
-    // Array of nested documents using the reactionSchema
+    // Array of nested Reaction documents
     reactions: [reactionSchema],
   },
   {
@@ -60,7 +62,7 @@ const thoughtSchema = new Schema(
   }
 );
 
-// Virtual to get reaction count
+// Virtual to retrieve the reaction count
 thoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;
 });

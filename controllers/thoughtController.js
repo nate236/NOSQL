@@ -20,7 +20,7 @@ const thoughtController = {
       })
       .catch((err) => res.status(500).json(err));
   },
-  // POST to create a new thought and push its _id to the associated user's thoughts array field
+  // POST a new thought and push its _id to the associated user's thoughts array field
   createThought({ body }, res) {
     Thought.create(body)
       .then(({ _id }) => {
@@ -32,9 +32,7 @@ const thoughtController = {
       })
       .then((dbUserData) => {
         if (!dbUserData) {
-          return res.status(404).json({
-            message: 'Thought created but no user found with this id!',
-          });
+          return res.status(404).json({ message: 'Thought created but no user found with this id!' });
         }
         res.json({ message: 'Thought successfully created!' });
       })
@@ -70,7 +68,7 @@ const thoughtController = {
       .then(() => res.json({ message: 'Thought deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
-  // POST to create a reaction stored in a single thought's reactions array field
+  // POST to add a reaction stored in a thought's reactions array field
   addReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
@@ -85,7 +83,7 @@ const thoughtController = {
       })
       .catch((err) => res.status(500).json(err));
   },
-  // DELETE to remove a reaction by the reaction's reactionId value
+  // DELETE to remove a reaction by its reactionId from a thought's reactions array
   deleteReaction({ params }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
