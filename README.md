@@ -11,7 +11,7 @@ This a social network web application where users can share their thoughts, reac
 ## Usage
 
 - Github repo: <https://github.com/nate236/NOSQL>
-- Link to video: <>
+- Link to video: <https://www.youtube.com/watch?v=kdaYAJ-k8uY>
 
 ## Contribution
 Nathan Kelley
